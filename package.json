@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "relay": "relay-compiler",
-    "dev": "vite",
+    "dev:client": "vite",
+    "dev:server": "node ./server.js",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
@@ -21,13 +22,17 @@
   "homepage": "https://github.com/JSerZANP/relay-typescript-tutorial#readme",
   "dependencies": {
     "babel-plugin-relay": "^14.1.0",
-    "graphql": "^16.6.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "express-graphql": "^0.12.0",
+    "graphql": "^15.8.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-relay": "^14.1.0",
     "relay-compiler": "^14.1.0"
   },
   "devDependencies": {
+    "@types/node": "^18.7.23",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^2.1.0",
