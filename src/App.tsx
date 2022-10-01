@@ -1,30 +1,24 @@
-import { useEffect, useState } from "react";
-import fetchGraphQL from "./fetchGraphQL";
+import { graphql, useLazyLoadQuery } from "react-relay";
+import { AppQuery } from "./__generated__/AppQuery.graphql";
 
 function App() {
-  const [title, setTitle] = useState("");
-  useEffect(() => {
-    let isMounted = true;
-    fetchGraphQL(
-      `
-      query RootQuery {
-        hello
+  const { user } = useLazyLoadQuery<AppQuery>(
+    graphql`
+      query AppQuery($id: String!) {
+        user(id: $id) {
+          id
+          fav
+        }
       }
     `,
-      {}
-    )
-      .then((response) => {
-        setTitle(response.data.hello);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    { id: "jser1" }
+  );
 
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-  return <div>{title}</div>;
+  return (
+    <div>
+      {user?.id}, fav: {user?.fav}
+    </div>
+  );
 }
 
 export default App;
